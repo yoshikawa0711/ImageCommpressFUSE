@@ -1,6 +1,7 @@
 package imagecheck
 
 import (
+	"os"
 	"testing"
 )
 
@@ -15,8 +16,10 @@ func TestIsImage(t *testing.T) {
 		{"test004.txt", false},
 	}
 
+	pwd, _ := os.Getwd()
+
 	for idx, pattern := range patterns {
-		actual := IsImage("test/" + pattern.filename)
+		actual := IsImage(pwd + "/../test/" + pattern.filename)
 		if pattern.expected != actual {
 			t.Errorf("pattern %d: want %t, actual %t", idx, pattern.expected, actual)
 		}
