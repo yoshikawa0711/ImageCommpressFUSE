@@ -3,6 +3,7 @@ package getfile
 import (
 	"reflect"
 	"os"
+	"path/filepath"
 	"testing"
 )
 
@@ -19,9 +20,17 @@ func TestGetFiles(t *testing.T) {
 
 	for idx, pattern := range patterns {
 		actual := GetFiles(pattern.filepath)
+		_AddPaths(pattern.filepath, pattern.expected)
+
 		if !(reflect.DeepEqual(actual, pattern.expected)) {
 			t.Errorf("pattern %d: want %v, actual %v", idx, pattern.expected, actual)
 		}
 	}
 
+}
+
+func _AddPaths(prepath string, files []string) {
+	for idx, file := range files {
+		files[idx] = filepath.Join(prepath, file)
+	}
 }
