@@ -1,4 +1,4 @@
-package commpressimage
+package commpressjpeg
 
 import (
 //	"log"
